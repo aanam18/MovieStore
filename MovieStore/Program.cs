@@ -51,8 +51,10 @@
 //app.Run();
 //using MovieStore;
 //using MovieStore.Shared;
+using BookShoppingCartMvcUI.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MovieStore;
 using MovieStore.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -69,8 +71,8 @@ builder.Services
     .AddDefaultUI()
     .AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
-//builder.Services.AddTransient<IHomeRepository, HomeRepository>();
-//builder.Services.AddTransient<ICartRepository, CartRepository>();
+builder.Services.AddTransient<IHomeRepository, HomeRepository>();
+builder.Services.AddTransient<ICartRepository, CartRepository>();
 //builder.Services.AddTransient<IUserOrderRepository, UserOrderRepository>();
 //builder.Services.AddTransient<IStockRepository, StockRepository>();
 //builder.Services.AddTransient<IGenreRepository, GenreRepository>();
