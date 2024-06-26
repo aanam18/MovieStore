@@ -37,9 +37,16 @@ namespace MovieStore.Controllers
             return Ok(cartItem);
         }
 
-        public IActionResult Checkout()
+        public async Task<IActionResult> Checkout()
         {
-            return View();
+            bool isCheckedOut = await _cartRepo.DoCheckout();
+            if (!isCheckedOut)
+            {
+                throw new Exception("Something happen in server side");
+            }
+            return RedirectToAction("Index","Home");
+
+            //return View();
         }
 
         //[HttpPost]
@@ -53,15 +60,15 @@ namespace MovieStore.Controllers
         //    return RedirectToAction(nameof(OrderSuccess));
         //}
 
-        public IActionResult OrderSuccess()
-        {
-            return View();
-        }
+        //public IActionResult OrderSuccess()
+        //{
+        //    return View();
+        //}
 
-        public IActionResult OrderFailure()
-        {
-            return View();
-        }
+        //public IActionResult OrderFailure()
+        //{
+        //    return View();
+        //}
 
     }
 }

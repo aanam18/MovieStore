@@ -1,11 +1,7 @@
-﻿namespace MovieStore.Repositories;
-
-public interface IUserOrderRepository
+﻿namespace MovieStore.Repositories
 {
-    Task<IEnumerable<Order>> UserOrders(bool getAll=false);
-    //Task ChangeOrderStatus(UpdateOrderStatusModel data);
-    Task TogglePaymentStatus(int orderId);
-    Task<Order?> GetOrderById(int id);
-    Task<IEnumerable<OrderStatus>> GetOrderStatuses();
-
+    public interface IUserOrderRepository
+    {
+        Task<IEnumerable<Order>> UserOrders();
+    }
 }
