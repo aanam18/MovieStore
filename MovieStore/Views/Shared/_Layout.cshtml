@@ -69,30 +69,42 @@
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-
-                            <a class="nav-link " asp-controller="Home" asp-action="Index">Home</a>
-                            <span class="visually-hidden">(current)</span>
-
+                            <a class="nav-link active" href="/Home/Index">
+                                Home
+                                <span class="visually-hidden">(current)</span>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            @* <a class="nav-link " asp-controller="Category" asp-action="Index">Category</a> *@
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" href="/Home/Privacy">Privacy</a>
                         </li>
                         @if (User.IsInRole(Roles.Admin.ToString()))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" href="/AdminOperations/AllOrders">Orders</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Stock/Index">Stock</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/Genre/Index">Genre</a>
+                                <a class="nav-link" href="/AdminOperations/Dashboard">Dashboard</a>
                             </li>
 
+                            @* <li class="nav-item">
+                                <a class="nav-link" href="/AdminOperations/Dashboard">Dashboard</a>
+                            </li> *@
+                            @*  <li class="nav-item">
+                        <a class="nav-link"
+                        href="/AdminOperations/AllOrders">Orders</a>
+                        </li>
+
+                        <li class="nav-item">
+                        <a class="nav-link" href="/Stock/Index">Stock</a>
+                        </li>
+
+                        <li class="nav-item">
+                        <a class="nav-link" href="/Genre/Index">Genre</a>
+                        </li>
+
+                        <li class="nav-item">
+                        <a class="nav-link" href="/Book/Index">Books</a>
+                        </li> *@
                         }
 
-                        @* <li class="nav-item dropdown">
+                        @*<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                         <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Action</a>
@@ -101,7 +113,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Separated link</a>
                         </div>
-                        </li> *@
+                        </li>*@
                     </ul>
                     <partial name="_LoginPartial" />
 
