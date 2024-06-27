@@ -64,7 +64,7 @@ namespace BookShoppingCartMvcUI.Repositories
         }
 
 
-        public async Task<int> RemoveItem(int bookId)
+        public async Task<int> RemoveItem(int bookId)   
         {
             //using var transaction = _db.Database.BeginTransaction();
             string userId = GetUserId();
@@ -102,7 +102,7 @@ namespace BookShoppingCartMvcUI.Repositories
             var shoppingCart = await _db.ShoppingCarts
                                   .Include(a => a.CartDetails)
                                   .ThenInclude(a => a.Book)
-                                  //.ThenInclude(a => a.Stock)
+                                  .ThenInclude(a => a.Stock)
                                   .Include(a => a.CartDetails)
                                   .ThenInclude(a => a.Book)
                                   .ThenInclude(a => a.Genre)
@@ -178,23 +178,23 @@ namespace BookShoppingCartMvcUI.Repositories
 
                     // update stock here
 
-                    //    var stock = await _db.Stocks.FirstOrDefaultAsync(a => a.BookId == item.BookId);
-                    //    if (stock == null)
-                    //    {
-                    //        throw new InvalidOperationException("Stock is null");
-                    //    }
+                    var stock = await _db.Stocks.FirstOrDefaultAsync(a => a.BookId == item.BookId);
+                    if (stock == null)
+                    {
+                        throw new InvalidOperationException("Stock is null");
+                    }
 
-                    //    if (item.Quantity > stock.Quantity)
-                    //    {
-                    //        throw new InvalidOperationException($"Only {stock.Quantity} items(s) are available in the stock");
-                    //    }
-                    //    // decrease the number of quantity from the stock table
-                    //    stock.Quantity -= item.Quantity;
+                    if (item.Quantity > stock.Quantity)
+                    {
+                        throw new InvalidOperationException($"Only {stock.Quantity} items(s) are available in the stock");
+                    }
+                    // decrease the number of quantity from the stock table
+                    stock.Quantity -= item.Quantity;
                     //}
-                    
 
-                    
-                    
+
+
+
                     //}
                 }
                 _db.SaveChanges();

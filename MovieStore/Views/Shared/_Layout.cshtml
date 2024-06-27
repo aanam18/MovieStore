@@ -62,7 +62,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a class="navbar-brand" href="#">MovieStore</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -78,6 +78,16 @@
                             @* <a class="nav-link " asp-controller="Category" asp-action="Index">Category</a> *@
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (User.IsInRole(Roles.Admin.ToString()))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/AdminOperations/AllOrders">Orders</a>
+                       
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Stock/Index">Stock</a>
+                            </li> </li>
+                        
+                        }
 
                         @* <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -101,6 +111,9 @@
     
 
 <div class="container">
+    <div class="my-2">
+            <partial name="_Notifications"/>
+    </div>
     @RenderBody()
 </div>
 </body>
