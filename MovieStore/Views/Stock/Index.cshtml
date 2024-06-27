@@ -3,7 +3,18 @@
     Layout = "_AdminLayout";
 }
 <h2>Stocks</h2>
-
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
 <form asp-action="Index" method="get" class="my-2 d-flex gap-2">
     <input type="text" name="sTerm" class="form-control w-25" placeholder="Search by book" />
     <button type="submit" class="btn btn-primary">Find</button>

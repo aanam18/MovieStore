@@ -5,6 +5,18 @@
 
 <h2>Genres</h2>
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
 <a asp-action="AddGenre" asp-controller="Genre" class="btn btn-primary">Add More</a>
 
 <table class="table table-striped my-2">

@@ -22,7 +22,7 @@ namespace MovieStore.Controllers
         public IActionResult AddGenre()
         {
             return View();
-        }
+        }   
 
         [HttpPost]
         public async Task<IActionResult> AddGenre(GenreDTO genre)
@@ -36,7 +36,7 @@ namespace MovieStore.Controllers
                 var genreToAdd = new Genre { GenreName = genre.GenreName, Id = genre.Id };
                 await _genreRepo.AddGenre(genreToAdd);
                 TempData["successMessage"] = "Genre added successfully";
-                return RedirectToAction(nameof(AddGenre));
+                return RedirectToAction(nameof(Index));
             }
             catch(Exception ex)
             {
@@ -83,10 +83,20 @@ namespace MovieStore.Controllers
 
         public async Task<IActionResult> DeleteGenre(int id)
         {
-            var genre = await _genreRepo.GetGenreById(id);
+            try
+            {
+                var genre = await _genreRepo.GetGenreById(id);
             if (genre is null)
                 throw new InvalidOperationException($"Genre with id: {id} does not found");
             await _genreRepo.DeleteGenre(genre);
+                TempData["SuccessMessage"] = "Genre deleted successfully.";
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = "Genre could not be deleted!";
+            }
+
+
             return RedirectToAction(nameof(Index));
 
         }
