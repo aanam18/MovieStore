@@ -4,19 +4,31 @@
 }
 
 <h2>Movies</h2>
-
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
 <a asp-action="AddBook" asp-controller="Book" class="btn btn-primary">Add More</a>
 
 @if(Model?.Count()>0)
 {
     <table class="table table-striped my-2">
         <tr>
-            <th>Image</th>
-            <th>Movie</th>
-            <th>Director</th>
-            <th>Genre</th>
-            <th>Price</th>
-            <th>Action</th>
+            <th class="text-white">Image</th>
+            <th class="text-white">Movie</th>
+            
+            <th class="text-white">Director</th>
+            <th class="text-white">Genre</th>
+            <th class="text-white">Price</th>
+            <th class="text-white">Action</th>
         </tr>
 
         @foreach (var book in Model)
@@ -32,10 +44,10 @@
                         <img src="/images/@book.Image" style="width:80px;height:100px" alt="book image" />
                     }
                 </td>
-                <td>@book.BookName</td>
-                <td>@book.AuthorName</td>
-                <td>@book.Genre.GenreName</td>
-                <td>@book.Price</td>
+                <td class="text-white">@book.BookName</td>
+                <td class="text-white">@book.AuthorName</td>
+                <td class="text-white">@book.Genre.GenreName</td>
+                <td class="text-white">@book.Price</td>
                 <td>
                     <a asp-action="UpdateBook" asp-controller="Book" asp-route-id="@book.Id" class="btn btn-success">Edit</a>
                     <a asp-action="DeleteBook" asp-controller="Book" asp-route-id="@book.Id" class="btn btn-danger" onclick="return window.confirm('Are you sure?')">Delete</a>

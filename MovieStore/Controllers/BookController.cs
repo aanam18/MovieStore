@@ -72,8 +72,8 @@ public class BookController : Controller
                 Price = bookToAdd.Price
             };
             await _bookRepo.AddBook(book);
-            TempData["successMessage"] = "Book is added successfully";
-            return RedirectToAction(nameof(AddBook));
+            TempData["successMessage"] = "Movie is added successfully";
+            return RedirectToAction(nameof(Index));
         }
         catch (InvalidOperationException ex)
         {
@@ -97,7 +97,7 @@ public class BookController : Controller
         var book = await _bookRepo.GetBookById(id);
         if(book==null)
         {
-            TempData["errorMessage"] = $"Book with the id: {id} does not found";
+            TempData["errorMessage"] = $"Movie with the id: {id} does not found";
             return RedirectToAction(nameof(Index));
         }
         var genreSelectList = (await _genreRepo.GetGenres()).Select(genre => new SelectListItem
@@ -163,7 +163,7 @@ public class BookController : Controller
             {
                 _fileService.DeleteFile(oldImage);
             }
-            TempData["successMessage"] = "Book is updated successfully";
+            TempData["successMessage"] = "Movie is updated successfully";
             return RedirectToAction(nameof(Index));
         }
         catch (InvalidOperationException ex)
@@ -190,7 +190,7 @@ public class BookController : Controller
             var book = await _bookRepo.GetBookById(id);
             if (book == null)
             {
-                TempData["errorMessage"] = $"Book with the id: {id} does not found";
+                TempData["errorMessage"] = $"Movie with the id: {id} does not found";
             }
             else
             {
@@ -199,6 +199,8 @@ public class BookController : Controller
                 {
                     _fileService.DeleteFile(book.Image);
                 }
+                TempData["successMessage"] = "Movie is delete successfully";
+                return RedirectToAction(nameof(AddBook));
             }
         }
         catch (InvalidOperationException ex)

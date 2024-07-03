@@ -2,7 +2,7 @@
 @{
     Layout = "_AdminLayout";
 }
-<div style="width:50%">
+<div >
     <h2> Add Movie </h2>
     <a asp-action="Index" asp-controller="Book" class="btn btn-primary">Back</a>
     <form asp-action="AddBook" enctype="multipart/form-data">
@@ -22,7 +22,7 @@
 
         <div class="my-2">
             <label>Genre*</label>
-            <select class="form-control" asp-for="GenreId" asp-items="Model.GenreList">
+            <select class="form-control text-black" asp-for="GenreId" asp-items="Model.GenreList">
                 <option value="">Select Genre</option>
             </select>
             <span asp-validation-for="GenreId" class="text-danger"></span>

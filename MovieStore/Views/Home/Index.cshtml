@@ -2,22 +2,21 @@
 @{
 
 }
+
+
 <div class="my-2">
     <form asp-action="Index" class="row row-cols-lg-auto g-3 align-items-center">
-  
-
-  <div class="col-12">
+        <div class="col-12">
             <label class="visually-hidden" for="genreId">Genres</label>
             <select class="form-select" id="genreId" name="genreId">
-      <option selected>Genre</option>
+                <option selected>Genre</option>
                 @foreach(var genre in Model.Genres)
                 {
                     <option selected="@(genre.Id == Model.GenreId)" value="@genre.Id">@genre.GenreName</option>
                 }
-                
-    
-    </select>
-  </div>
+            </select>
+        </div>
+
         <div class="col-12">
             <label class="visually-hidden" for="sterm">Search by title</label>
             <div class="input-group">
@@ -26,18 +25,17 @@
             </div>
         </div>
 
-
-
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">Search</button>
-    <a href="/Home/Index" class="btn btn-primary">Reset</a>
-  </div>
-</form>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a href="/Home/Index" class="btn btn-primary">Reset</a>
+        </div>
+    </form>
 </div>
+
 <div class="w-100 mt-4 d-flex flex-wrap">
     @foreach (var book in Model.Books)
     {
-<div class="card mx-2 mb-4" style="width: 16rem;">
+        <div class="card mx-2 mb-4" style="width: 16rem;">
             @if (string.IsNullOrEmpty(book.Image))
             {
                 <img style="width:100%;height:300px" src="/images/cotton candy.jpg" class="card-img-top" alt="...">
@@ -46,55 +44,88 @@
             {
                 <img style="width:100%;height:300px" src="/images/@book.Image" class="card-img-top" alt="...">
             }
-            
-    <div class="card-body">
-        <h5 class="card-title">@book.BookName</h5>
-        <p class="card-text">
-                    Genre:@book.GenreName
-                    Director Name:@book.AuthorName
-                    Price:@book.Price
-                    @* <b>@book.Quantity</b> *@
-        </p>
+
+          
+
+            <div class="card-body">
+                <h5 class="card-title">@book.BookName</h5>
+                <p class="card-text">
+                    Genre: @book.GenreName<br />
+                    Director Name: @book.AuthorName<br />
+                    Price: @book.Price
+                </p>
                 @if (book.Quantity > 0)
                 {
                     <button type="button" onclick="add(@book.Id)" class="btn btn-primary">Add To Cart</button>
-                }else{
+                }
+                else
+                {
                     <span style="border:1px solid;padding:5px 8px;color:red;border-radius:5px;">Out of Stock</span>
                 }
-    </div>
-    </div>
+            </div>
+        </div>
     }
 </div>
 
-
-
+<!-- Modal Popup for Book Details -->
+<div class="modal fade" id="bookDetailsModal" tabindex="-1" role="dialog" aria-labelledby="bookDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookDetailsModalLabel">Book Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body" id="bookDetailsModalBody">
+                <!-- Book details will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     <script>
-     
+        // Function to show book details in modal
+        function showDetailsModal(url) {
+            // Fetch book details from server
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    // Set modal body content with book details
+                    document.getElementById("bookDetailsModalBody").innerHTML = data;
+                    // Show the modal
+                    $('#bookDetailsModal').modal('show');
+                })
+                .catch(error => {
+                    console.error('Error fetching book details:', error);
+                });
+        }
+
+        // Function to add book to cart
         async function add(bookId) {
             var usernameEl = document.getElementById("username");
             if (usernameEl == null) {
                 window.location.href = "/Identity/Account/Login";
-                // var username = usernameEl.innerText;
-                // if (username.length < 1) {
-                //     window.location.href = "/Identity/Account/Login";
-                // }
+                return;
             }
             try {
                 var response = await fetch(`/Cart/AddItem?bookId=${bookId}`);
                 if (response.status == 200) {
                     var result = await response.json();
                     var cartCountEl = document.getElementById("cartCount");
-                    cartCountEl.innerHTML = result;
-                    window.location.href = "#cartCount";
-                   
+                    if (cartCountEl) {
+                        cartCountEl.innerHTML = result;
+                    }
+                    window.location.href = "#cartCount"; // Scroll to top of cart count
                 }
             }
             catch (err) {
-                console.log(err);
+                console.error('Error adding item to cart:', err);
             }
-        
         }
     </script>
 }
+

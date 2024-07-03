@@ -16,22 +16,22 @@
     </div>
 }
 <form asp-action="Index" method="get" class="my-2 d-flex gap-2">
-    <input type="text" name="sTerm" class="form-control w-25" placeholder="Search by Movie" />
+    <input type="text" name="sTerm" class="form-control w-40" placeholder="Search by Movie" />
     <button type="submit" class="btn btn-primary">Find</button>
     <a asp-action="Index" asp-controller="Stock" class="btn btn-primary">Clear</a>
 </form>
 
 <table class="table table-bordered">
   <tr>
-    <th>Movie</th>
-    <th>Stock</th>
-    <th>Actions</th>
+        <th class="text-white">Movie</th>
+        <th class="text-white">Stock</th>
+        <th class="text-white">Actions</th>
   </tr>
   @foreach(var item in Model)
   {
     <tr>
-      <td>@item.BookName</td>
-      <td>@item.Quantity</td>
+            <td class="text-white">@item.BookName</td>
+            <td class="text-white">@item.Quantity</td>
       <td>
          <a asp-action="ManangeStock" asp-controller="Stock" asp-route-bookId="@item.BookId" class="btn btn-info"> Update Stock</a>
       </td>

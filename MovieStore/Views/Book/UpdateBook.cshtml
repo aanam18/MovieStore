@@ -2,7 +2,7 @@
 @{
     Layout = "_AdminLayout";
 }
-<div style="width:50%">
+<div style="width:100%">
     <h2> Update Book </h2>
     <a asp-action="Index" asp-controller="Book" class="btn btn-primary">Back</a>
     <form asp-action="UpdateBook" enctype="multipart/form-data">
@@ -30,16 +30,16 @@
         </div>
 
         <div class="my-2">
-            <label>Price*</label>
+            <label >Price*</label>
             <input type="number" class="form-control" asp-for="Price" />
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
 
         <div class="my-2">
-            <label>Image</label>
+            <label class="w-40">Image</label>
             @if(!string.IsNullOrEmpty(Model.Image))
             {
-                <img src="/images/@Model.Image" style="width:100px;height:80px"/>
+                <img src="/images/@Model.Image" style="width:100px;height:80px" />
             }
             <input type="file" class="form-control" asp-for="ImageFile" />
         </div>

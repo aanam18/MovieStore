@@ -1,0 +1,35 @@
+﻿@model MovieStore.Models.UserViewModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Delete User";
+}
+<h3>@ViewData["Title"]</h3>
+
+<hr />
+<form action=" Delete" method="post" autocomplete="off">
+    <div class="mb-3">
+        <label class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly />
+
+    </div>
+    <div class="mb-3">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-control" asp-for="FirstName" readonly />
+        
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Last Name</label>
+        <input type="text" class="form-control" asp-for="LastName" readonly />
+        
+
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="text" class="form-control" asp-for="Email" readonly />
+        
+
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-primary" onclick="return function('Are you sure')">Delete</button>
+    </div>
+</form>

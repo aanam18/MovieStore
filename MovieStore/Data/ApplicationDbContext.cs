@@ -21,6 +21,7 @@ namespace MovieStore.Data
 
         public DbSet<OrderStatus> orderStatuses { get; set; }
         public DbSet<Stock> Stocks { get; set; }
+        public DbSet<User> Users { get; set; }
 
     }
 }
